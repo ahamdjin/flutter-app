@@ -54,7 +54,7 @@ class AppState extends ChangeNotifier {
 
   factory AppState.demo() {
     return AppState._(
-      store: LocalStore(),
+      store: LocalStore.memory(),
       tasks: List.of(_starterTasks),
       darkMode: false,
       focusSessions: 7,
