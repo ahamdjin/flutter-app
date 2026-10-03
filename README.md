@@ -1,19 +1,22 @@
-# Flutter App
+# Orbit
 
-A clean Flutter starter app for **iOS and Android**.
+Orbit is a polished, local-first productivity app built with Flutter for **iOS and Android**.
 
-## What's included
+## What works
 
-- Flutter + Dart
-- Material 3 design
-- Light and dark themes
-- Bottom navigation with Home, Explore, and Profile starter screens
-- A basic widget test
-- No third-party state-management or backend dependency yet
+- Premium Material 3 light/dark UI
+- Today dashboard with live completion progress
+- Add, complete, search, filter, and delete tasks
+- Persistent tasks and preferences using `shared_preferences`
+- Focus timer with 25/45/60 minute presets
+- Persistent focus-session and focus-minute stats
+- Editable local profile name
+- Bottom navigation designed for mobile
+- Widget tests and GitHub Actions quality checks
 
-## First-time setup
+## Run the app
 
-Install Flutter, clone this repository, then run:
+Install a current Flutter stable SDK, clone the repository, then run:
 
 ```bash
 chmod +x tool/bootstrap.sh
@@ -21,9 +24,9 @@ chmod +x tool/bootstrap.sh
 flutter run
 ```
 
-The bootstrap command generates the native Android and iOS project folders using your installed Flutter SDK. This keeps the native scaffolding aligned with the Flutter version you actually use.
+The bootstrap command generates the native Android and iOS project folders with the Flutter SDK installed on your machine and then gets dependencies.
 
-You can also run the equivalent command manually:
+Equivalent manual commands:
 
 ```bash
 flutter create --platforms=android,ios --project-name=flutter_app --org=com.example .
@@ -31,29 +34,43 @@ flutter pub get
 flutter run
 ```
 
-## Useful commands
+## Quality checks
 
 ```bash
-flutter doctor
-flutter test
 flutter analyze
-flutter run
+flutter test
 ```
 
-## iOS note
-
-Building or running the iOS version requires macOS with Xcode installed. Android development works on macOS, Windows, or Linux with the Android SDK configured.
+GitHub Actions runs both checks automatically on pushes and pull requests to `main`.
 
 ## Project structure
 
 ```text
 lib/
-├── main.dart
 ├── app.dart
+├── main.dart
+├── models/
+│   └── task_item.dart
 ├── screens/
-│   └── home_screen.dart
+│   ├── focus_screen.dart
+│   ├── home_screen.dart
+│   ├── profile_screen.dart
+│   ├── root_shell.dart
+│   └── tasks_screen.dart
+├── services/
+│   └── local_store.dart
+├── state/
+│   ├── app_scope.dart
+│   └── app_state.dart
+├── theme/
+│   └── app_theme.dart
 └── widgets/
-    └── feature_card.dart
+    ├── task_editor_sheet.dart
+    └── ui.dart
 ```
 
-This is intentionally a simple foundation. The next step is to replace the starter content with the real app idea and connect any services the app needs.
+## Platform note
+
+iOS builds require macOS with Xcode. Android builds work with the Android SDK on macOS, Windows, or Linux.
+
+The app currently stores data locally on-device. A backend, authentication, cloud sync, push notifications, and App Store / Play Store production configuration can be added next.
