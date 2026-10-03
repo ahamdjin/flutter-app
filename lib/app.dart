@@ -1,38 +1,35 @@
 import 'package:flutter/material.dart';
 
-import 'screens/home_screen.dart';
+import 'screens/root_shell.dart';
+import 'state/app_scope.dart';
+import 'state/app_state.dart';
+import 'theme/app_theme.dart';
 
-class FlutterStarterApp extends StatelessWidget {
-  const FlutterStarterApp({super.key});
+class OrbitApp extends StatelessWidget {
+  const OrbitApp({
+    super.key,
+    required this.state,
+  });
+
+  final AppState state;
 
   @override
   Widget build(BuildContext context) {
-    const seedColor = Color(0xFF5B5BD6);
-
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter App',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: seedColor,
-          brightness: Brightness.light,
-        ),
-        useMaterial3: true,
-        scaffoldBackgroundColor: const Color(0xFFF7F7FB),
-        appBarTheme: const AppBarTheme(
-          centerTitle: false,
-          backgroundColor: Colors.transparent,
-          surfaceTintColor: Colors.transparent,
-        ),
+    return AppScope(
+      state: state,
+      child: AnimatedBuilder(
+        animation: state,
+        builder: (context, _) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Orbit',
+            theme: AppTheme.light(),
+            darkTheme: AppTheme.dark(),
+            themeMode: state.darkMode ? ThemeMode.dark : ThemeMode.light,
+            home: const RootShell(),
+          );
+        },
       ),
-      darkTheme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: seedColor,
-          brightness: Brightness.dark,
-        ),
-        useMaterial3: true,
-      ),
-      home: const HomeScreen(),
     );
   }
 }
