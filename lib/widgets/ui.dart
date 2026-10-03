@@ -117,62 +117,65 @@ class TaskTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
 
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      decoration: BoxDecoration(
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Material(
         color: scheme.surface,
-        borderRadius: BorderRadius.circular(22),
-        border: Border.all(
-          color: scheme.outlineVariant.withValues(alpha: 0.5),
-        ),
-      ),
-      child: ListTile(
-        minVerticalPadding: 12,
-        contentPadding: const EdgeInsets.fromLTRB(10, 8, 8, 8),
-        leading: Checkbox(
-          value: task.completed,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(6),
-          ),
-          onChanged: (_) => onToggle(),
-        ),
-        title: Text(
-          task.title,
-          style: TextStyle(
-            fontWeight: FontWeight.w700,
-            decoration: task.completed ? TextDecoration.lineThrough : null,
-            color: task.completed ? scheme.onSurfaceVariant : null,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(22),
+          side: BorderSide(
+            color: scheme.outlineVariant.withValues(alpha: 0.5),
           ),
         ),
-        subtitle: Padding(
-          padding: const EdgeInsets.only(top: 5),
-          child: Row(
-            children: [
-              Container(
-                width: 7,
-                height: 7,
-                decoration: BoxDecoration(
-                  color: _priorityColor(),
-                  shape: BoxShape.circle,
+        clipBehavior: Clip.antiAlias,
+        child: ListTile(
+          minVerticalPadding: 12,
+          contentPadding: const EdgeInsets.fromLTRB(10, 8, 8, 8),
+          leading: Checkbox(
+            value: task.completed,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(6),
+            ),
+            onChanged: (_) => onToggle(),
+          ),
+          title: Text(
+            task.title,
+            style: TextStyle(
+              fontWeight: FontWeight.w700,
+              decoration: task.completed ? TextDecoration.lineThrough : null,
+              color: task.completed ? scheme.onSurfaceVariant : null,
+            ),
+          ),
+          subtitle: Padding(
+            padding: const EdgeInsets.only(top: 5),
+            child: Row(
+              children: [
+                Container(
+                  width: 7,
+                  height: 7,
+                  decoration: BoxDecoration(
+                    color: _priorityColor(),
+                    shape: BoxShape.circle,
+                  ),
                 ),
-              ),
-              const SizedBox(width: 7),
-              Flexible(
-                child: Text(
-                  task.dueLabel,
-                  overflow: TextOverflow.ellipsis,
+                const SizedBox(width: 7),
+                Flexible(
+                  child: Text(
+                    task.dueLabel,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
+          trailing: onMenu == null
+              ? const Icon(Icons.chevron_right_rounded)
+              : IconButton(
+                  tooltip: 'Task options',
+                  onPressed: onMenu,
+                  icon: const Icon(Icons.more_horiz_rounded),
+                ),
         ),
-        trailing: onMenu == null
-            ? const Icon(Icons.chevron_right_rounded)
-            : IconButton(
-                tooltip: 'Task options',
-                onPressed: onMenu,
-                icon: const Icon(Icons.more_horiz_rounded),
-              ),
       ),
     );
   }
