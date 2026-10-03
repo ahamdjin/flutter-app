@@ -24,10 +24,6 @@ class FlutterStarterApp extends StatelessWidget {
           backgroundColor: Colors.transparent,
           surfaceTintColor: Colors.transparent,
         ),
-        cardTheme: const CardThemeData(
-          elevation: 0,
-          margin: EdgeInsets.zero,
-        ),
       ),
       darkTheme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
