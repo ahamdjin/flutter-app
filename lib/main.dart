@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'app.dart';
+import 'state/app_state.dart';
 
-void main() {
-  runApp(const FlutterStarterApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final state = await AppState.load();
+  runApp(OrbitApp(state: state));
 }
