@@ -11,28 +11,19 @@ Orbit is a polished, local-first productivity app built with Flutter for **iOS a
 - Focus timer with 25/45/60 minute presets
 - Persistent focus-session and focus-minute stats
 - Editable local profile name
-- Bottom navigation designed for mobile
+- Native Android and iOS projects committed to the repository
 - Widget tests and GitHub Actions quality checks
 
 ## Run the app
 
-Install a current Flutter stable SDK, clone the repository, then run:
+Install a current Flutter stable SDK, clone this repository, then run:
 
 ```bash
-chmod +x tool/bootstrap.sh
-./tool/bootstrap.sh
-flutter run
-```
-
-The bootstrap command generates the native Android and iOS project folders with the Flutter SDK installed on your machine and then gets dependencies.
-
-Equivalent manual commands:
-
-```bash
-flutter create --platforms=android,ios --project-name=flutter_app --org=com.example .
 flutter pub get
 flutter run
 ```
+
+Choose an Android emulator/device or an iOS simulator/device when Flutter asks.
 
 ## Quality checks
 
@@ -41,11 +32,13 @@ flutter analyze
 flutter test
 ```
 
-GitHub Actions runs both checks automatically on pushes and pull requests to `main`.
+GitHub Actions runs analysis, tests, and an Android debug build automatically on pushes and pull requests to `main`.
 
 ## Project structure
 
 ```text
+android/                 # Native Android project
+ios/                     # Native iOS project
 lib/
 ├── app.dart
 ├── main.dart
@@ -71,6 +64,6 @@ lib/
 
 ## Platform note
 
-iOS builds require macOS with Xcode. Android builds work with the Android SDK on macOS, Windows, or Linux.
+iOS builds require macOS with Xcode. Android builds require the Android SDK.
 
-The app currently stores data locally on-device. A backend, authentication, cloud sync, push notifications, and App Store / Play Store production configuration can be added next.
+The app currently stores data locally on-device. Authentication, cloud sync, push notifications, and store-release configuration can be added when the product direction is finalized.
