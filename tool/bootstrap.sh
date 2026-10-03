@@ -6,14 +6,13 @@ if ! command -v flutter >/dev/null 2>&1; then
   exit 1
 fi
 
-flutter create \
-  --platforms=android,ios \
-  --project-name=flutter_app \
-  --org=com.example \
-  .
+if [ ! -d android ] || [ ! -d ios ]; then
+  echo "Native project folders are missing; regenerating them..."
+  flutter create     --platforms=android,ios     --project-name=flutter_app     --org=com.orbitproductivity     .
+fi
 
 flutter pub get
 
 echo
-echo "Flutter platform projects are ready."
+echo "Orbit is ready."
 echo "Run: flutter run"
