@@ -106,14 +106,15 @@ class ProfileScreen extends StatelessWidget {
               const SizedBox(height: 30),
               const SectionTitle(title: 'Preferences'),
               const SizedBox(height: 12),
-              Container(
-                decoration: BoxDecoration(
-                  color: scheme.surface,
+              Material(
+                color: scheme.surface,
+                shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(24),
-                  border: Border.all(
+                  side: BorderSide(
                     color: scheme.outlineVariant.withValues(alpha: 0.55),
                   ),
                 ),
+                clipBehavior: Clip.antiAlias,
                 child: Column(
                   children: [
                     SwitchListTile(
